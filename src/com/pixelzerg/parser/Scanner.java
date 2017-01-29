@@ -10,12 +10,32 @@ public class Scanner {
     private Pos lpos = new Pos();
     private int lindex = 0;
 
+    public Scanner(String source) {
+        setSource(source);
+    }
+
+    public Scanner(String filepath, String source) {
+
+        this.filepath = filepath;
+        setSource(source);
+    }
+
+    public void setSource(String source){
+        //TODO stuff
+    }
+
     public char getCur(){
-        return source.charAt(curindex);
+        return this.charAt(curindex);
+    }
+
+    public char charAt(int index){
+        if(curindex>=source.length())return (char)-1;
+        return source.charAt(index);
     }
 
     public char look(int off){
-       return source.charAt(curindex+off);
+        if(curindex+off>=source.length())return (char)-1;
+        return source.charAt(curindex+off);
     }
 
     public void increment(int x){
@@ -23,17 +43,17 @@ public class Scanner {
     }
 
     public Pos getPos() {
-        Pos ret = lpos;
+        Pos ret = lpos.clone();
         int i;
-        for (i = lindex; i < curindex; i++) {
-            if(source.charAt(i)=='\n'){
+        for (i = lindex; i <= curindex; i++) {
+            if(this.charAt(i)=='\n'){
                 ret.lineno++;
                 ret.charno=0;
             }else{
                 ret.charno++;
             }
         }
-        lindex=i+1;
+        lindex=i;
         lpos=ret;
         return ret;
     }
@@ -42,7 +62,7 @@ public class Scanner {
         Pos ret = lpos;
         int i;
         for (i = lindex; i < curindex+lookahead; i++) {
-            if(source.charAt(i)=='\n'){
+            if(this.charAt(i)=='\n'){
                 ret.lineno++;
                 ret.charno=0;
             }else{
