@@ -2,8 +2,9 @@ package com.pixelzerg.parser;
 
 public class Main {
 
+    //TODO parse with methods for each production
     public static void main(String[] args) {
-        Scanner s = new Scanner("moo\nyoo");
+        Scanner s = new Scanner("m\roo\r\nyoo");
         char c = (char) -1;
         while (true) {
             c = s.getCur();
@@ -19,7 +20,10 @@ public class Main {
         if (c == (char) -1) {
             return "-1";
         } else if (c == '\n') {
-            return "NEWLINE";
+            return "NL";
+        }
+        else if (c == '\r') {
+            return "CR";
         }
         return "" + c;
     }

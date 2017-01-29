@@ -20,8 +20,21 @@ public class Scanner {
         setSource(source);
     }
 
-    public void setSource(String source){
-        //TODO stuff
+    public void setSource(String sc){
+        this.source = sc;
+        this.source = this.source.replace("\r\n","\n");
+        this.source = this.source.replace("\r","\n");
+        this.source = this.source.replace("\u2028","\n");
+        this.source = this.source.replace("\u2029","\n");
+        //2.3.1
+        if(source.endsWith("\u001A")){
+            source=source.substring(0,source.length()-1-1);
+        }
+        if(!source.isEmpty()){
+            if(!CharUtils.IsNewline(source.charAt(source.length()-1))){
+                source+='\r';
+            }
+        }
     }
 
     public char getCur(){
