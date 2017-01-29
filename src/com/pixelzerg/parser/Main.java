@@ -1,4 +1,4 @@
-package com.pixelzerg;
+package com.pixelzerg.parser;
 
 public class Main {
 
