@@ -1,0 +1,24 @@
+#!/bin/bash
+outdir="out/production"
+dir="src"
+main=`find src -name "Main.java" | grep -o '/.\+' | head -1 | grep -o '\w.\+' | awk -F".java" '{print $1}'`
+if [ ! -z $1  ]
+then
+outdir=$1
+fi
+if [ ! -z $2  ]
+then
+dir=$2
+fi
+if [ ! -z $3  ]
+then
+main=$3
+fi
+#echo $outdir
+#echo $dir
+#echo $main
+
+rm -rf $outdir
+mkdir -p $outdir
+javac -d $outdir $(find $dir -name "*.java")
+java -cp $outdir $main
