@@ -1,30 +1,31 @@
-package com.pixelzerg.parser;
+package com.pixelzerg;
+
+import com.pixelzerg.pzcsharp.Scanner;
+import com.pixelzerg.pzcsharp.Token;
+import com.pixelzerg.pzcsharp.Utils;
+import com.pixelzerg.pzcsharp.matchers.KeywordMatcher;
 
 public class Main {
 
-    //TODO parse with methods for each production
     public static void main(String[] args) {
-        Scanner s = new Scanner("m\roo\r\nyoo");
-        char c = (char) -1;
-        while (true) {
-            c = s.getCur();
-            System.out.println(Expand(c)+"\t"+s.getPos());
-            if(c==(char)-1){
-                break;
-            }
-            s.increment(1);
+        System.out.println("Enter source code to analyse");
+        String sc =
+        /*
+                new java.util.Scanner(System.in).next();
+	    /*/
+                "ab" +
+                        "\nc" +
+                        "\ndefg" +
+                        "\nh" +
+                        "\nij";
+        //*/
+        //System.out.println(com.pixelzerg.pzcsharp.Utils.CheckCharacter('O', com.pixelzerg.pzcsharp.Utils.CharacterType.Letter));
+        //com.pixelzerg.pzcsharp.Core.Do(sc);
+        try {
+            Token t = new KeywordMatcher("moo", Utils.TokenType.Word).Select(new Scanner("moo banan laa"));
+            System.out.println(t);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }
-
-    public static String Expand(char c) {
-        if (c == (char) -1) {
-            return "-1";
-        } else if (c == '\n') {
-            return "NL";
-        }
-        else if (c == '\r') {
-            return "CR";
-        }
-        return "" + c;
     }
 }
