@@ -1,6 +1,8 @@
 package com.pixelzerg.parser;
 
 import com.pixelzerg.parser.pzcsharp.Token;
+import com.pixelzerg.parser.pzcsharp.Utils;
+import com.pixelzerg.parser.pzcsharp.matchers.KeywordMatcher;
 
 public class Main {
 
@@ -8,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner("m\roo\r\nyoo");
         Token t = new Token(s);
-        System.out.println(t.toString());
+        System.out.println(t.toStringPretty());
         char c = (char) -1;
         while (true) {
             c = s.getCur();
@@ -18,6 +20,8 @@ public class Main {
             }
             s.increment(1);
         }
+//        KeywordMatcher m = new KeywordMatcher("moo", Utils.TokenType.Token);
+//        System.out.println(m.Select(s));
     }
 
     public static String Expand(char c) {
