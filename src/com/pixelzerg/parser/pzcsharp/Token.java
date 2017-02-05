@@ -4,8 +4,20 @@ import com.pixelzerg.parser.Pos;
 import com.pixelzerg.parser.Scanner;
 
 public class Token {
+	public enum TokenType{
+		NONE,
+		IDENTIFIER,
+		KEYWORD,
+		BOOLEAN_LITERAL,
+		INTEGER_LITERAL,
+		REAL_LITERAL,
+		CHARACTER_LITERAL,
+		STRING_LITERAL,
+		NULL_LITERAL,
+		OPERATOR_OR_PUNCTUATOR,
+	}
 	public String value = null;
-	public Utils.TokenType type = Utils.TokenType.Token;
+	public Token.TokenType type = Token.TokenType.NONE;
 	public Pos pos = new Pos();
 	
 	public Token(){}

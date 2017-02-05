@@ -8,11 +8,6 @@ import java.util.List;
  */
 public class Utils {
 
-	public enum TokenType {
-        Token,
-    }
-
-
 	static {
         Initialise();
     }
@@ -83,6 +78,10 @@ public class Utils {
             if (ctype == i) return true;
         }
         return false;
+    }
+
+    public static boolean CheckCharacter(char c, int type){
+        return Character.getType(c)==type;
     }
     
     public static boolean IsWhiteSpace(char c) {
