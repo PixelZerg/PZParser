@@ -17,9 +17,10 @@ public class Identifier extends TokenMatcher{
         ScannerSave save = s.saveq();
         if(!available_identifier(s))return 0;
         else if(s.getCur()=='@'){
+            //ss.increment(1);
             if(!identifier_or_keyword(s))return 0;
         }
-        return s.getOffset(save);
+        return s.getOffset(save)-1;
     }
 
     public boolean available_identifier(Scanner s){

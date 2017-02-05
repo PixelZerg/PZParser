@@ -35,7 +35,7 @@ public class Token {
     }
 
     public String jsonEscape(String s){
-	    return s.replace("\"", "\\\"").replace("\n","\\n");
+	    return s.replace("\"", "\\\"").replace("\n","\\n").replace("\r","\\r");
     }
 	
 

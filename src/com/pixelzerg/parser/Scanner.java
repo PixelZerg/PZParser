@@ -134,4 +134,8 @@ public class Scanner {
         return ret;
     }
 
+    public String toString(){
+        return this.curindex+", "+this.getCur();
+    }
+
 }

@@ -7,7 +7,7 @@ public class Main {
 
     //TODO parse with methods for each production
     public static void main(String[] args) {
-        Scanner s = new Scanner("mii\roo\r\nyoo");
+        Scanner s = new Scanner("@moo%yo");
 //        NONE t = new NONE(s);
 //        System.out.println(t.toStringPretty());
 //        char c = (char) -1;
@@ -24,6 +24,7 @@ public class Main {
         t.value = s.read(m.StepSafe(s));
         t.type=m.type;
         System.out.println(t.toStringPretty());
+        //TODO: Fix @
     }
 
     public static String Expand(char c) {
