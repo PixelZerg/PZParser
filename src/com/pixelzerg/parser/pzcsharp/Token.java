@@ -27,11 +27,15 @@ public class Token {
 	}
 	
 	public String toStringPretty() {
-        return "{\r\n\"value\": \"" + this.value + "\",\r\n  \"type\": {\r\n    \"index\": " + this.type.ordinal() + ",\r\n    \"value\": \"" + this.type.toString() + "\"\r\n  },\r\n  \"pos\": " + pos.toString()+ "\r\n}";
+        return "{\r\n\"value\": \"" + jsonEscape(this.value) + "\",\r\n  \"type\": {\r\n    \"index\": " + this.type.ordinal() + ",\r\n    \"value\": \"" + this.type.toString() + "\"\r\n  },\r\n  \"pos\": " + pos.toString()+ "\r\n}";
     }
 
     public String toString() {
-        return "{\"value\": \"" + this.value + "\", \"type\": { \"index\": " + this.type.ordinal() + ", \"value\": \"" + this.type.toString() + "\"}, \"pos\": " + this.pos.toString() + "}";
+        return "{\"value\": \"" + jsonEscape(this.value)+ "\", \"type\": { \"index\": " + this.type.ordinal() + ", \"value\": \"" + this.type.toString() + "\"}, \"pos\": " + this.pos.toString() + "}";
+    }
+
+    public String jsonEscape(String s){
+	    return s.replace("\"", "\\\"").replace("\n","\\n");
     }
 	
 

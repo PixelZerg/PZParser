@@ -16,7 +16,7 @@ public class Identifier extends TokenMatcher{
     public int Step(Scanner s){
         ScannerSave save = s.saveq();
         if(!available_identifier(s))return 0;
-        else if(s.next()=='@'){
+        else if(s.getCur()=='@'){
             if(!identifier_or_keyword(s))return 0;
         }
         return s.getOffset(save);
@@ -30,11 +30,11 @@ public class Identifier extends TokenMatcher{
     }
 
     public boolean identifier_or_keyword(Scanner s){
-        if(identifier_start_character(s)){
-            identifier_part_characters(s);
+        if(!identifier_start_character(s))return false;
+        if(!identifier_part_characters(s)){
             return true;
         }
-        return false;
+        return true;
     }
 
     public boolean identifier_start_character(Scanner s){
@@ -46,11 +46,17 @@ public class Identifier extends TokenMatcher{
     }
 
     public boolean identifier_part_characters(Scanner s){
-        if(identifier_part_character(s))return true;
-        else if(identifier_part_characters(s)){
-            return identifier_part_character(s);
-        }
-        return false;
+//        if(!identifier_part_character(s)){
+//            return false;
+//        }
+//        else{
+//            if(!identifier_part_characters(s))return false;
+//            if(!identifier_part_character(s))return false;
+//            return true;
+//        }
+        if(!identifier_part_character(s))return false;
+        while(identifier_part_character(s)){}
+        return true;
     }
 
     public boolean identifier_part_character(Scanner s){

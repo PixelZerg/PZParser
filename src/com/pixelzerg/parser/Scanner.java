@@ -113,7 +113,7 @@ public class Scanner {
     }
 
     public int getOffset(ScannerSave save){
-        return save.curIndex-this.curindex;
+        return this.curindex-save.curIndex;
     }
 
     public String read(int length){

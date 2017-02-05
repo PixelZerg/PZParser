@@ -1,13 +1,13 @@
 package com.pixelzerg.parser;
 
 import com.pixelzerg.parser.pzcsharp.Token;
-import com.pixelzerg.parser.pzcsharp.tokens.KeywordTokenMatcher;
+import com.pixelzerg.parser.pzcsharp.tokens.*;
 
 public class Main {
 
     //TODO parse with methods for each production
     public static void main(String[] args) {
-        Scanner s = new Scanner("m\roo\r\nyoo");
+        Scanner s = new Scanner("mii\roo\r\nyoo");
 //        NONE t = new NONE(s);
 //        System.out.println(t.toStringPretty());
 //        char c = (char) -1;
@@ -19,8 +19,11 @@ public class Main {
 //            }
 //            s.increment(1);
 //        }
-        KeywordTokenMatcher m = new KeywordTokenMatcher("moo", Token.TokenType.NONE);
-        System.out.println(m.Select(s));
+        Identifier m = new Identifier();
+        Token t = new Token(s);
+        t.value = s.read(m.StepSafe(s));
+        t.type=m.type;
+        System.out.println(t.toStringPretty());
     }
 
     public static String Expand(char c) {
