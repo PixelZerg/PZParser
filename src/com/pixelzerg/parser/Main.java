@@ -7,7 +7,7 @@ public class Main {
 
     //TODO parse with methods for each production
     public static void main(String[] args) {
-        Scanner s = new Scanner("@moo%yo");
+        Scanner s = new Scanner("@moi%yo");
 //        NONE t = new NONE(s);
 //        System.out.println(t.toStringPretty());
 //        char c = (char) -1;

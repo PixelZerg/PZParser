@@ -15,9 +15,9 @@ public class Identifier extends TokenMatcher{
     }
     public int Step(Scanner s){
         ScannerSave save = s.saveq();
-        if(!available_identifier(s))return 0;
-        else if(s.getCur()=='@'){
-            //ss.increment(1);
+        if(!available_identifier(s)){
+            if(!(s.getCur()=='@'))return 0;
+            s.increment(1);
             if(!identifier_or_keyword(s))return 0;
         }
         return s.getOffset(save)-1;
