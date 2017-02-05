@@ -24,7 +24,6 @@ public class Main {
         t.value = s.read(m.StepSafe(s));
         t.type=m.type;
         System.out.println(t.toStringPretty());
-        //TODO: Fix @
     }
 
     public static String Expand(char c) {
