@@ -8,7 +8,28 @@ import com.pixelzerg.parser.pzcsharp.TokenMatcher;
 
 /**
  * Created by pixelzerg on 05/02/17.
+
+ identifier:
+        available-identifier
+        @   identifier-or-keyword
+ available-identifier:
+        An identifier-or-keyword that is not a keyword
+ identifier-or-keyword:
+        identifier-start-character   identifier-part-charactersopt
+ identifier-start-character:
+        letter-character
+        _ (the underscore character U+005F)
+ identifier-part-characters:
+        identifier-part-character
+        identifier-part-characters   identifier-part-character
+ identifier-part-character:
+        letter-character
+        decimal-digit-character
+        connecting-character
+        combining-character
+        formatting-character
  */
+
 public class Identifier extends TokenMatcher{
     public Identifier(){
         super.type = Token.TokenType.IDENTIFIER;
