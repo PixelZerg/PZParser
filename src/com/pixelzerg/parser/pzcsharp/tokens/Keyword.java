@@ -1,8 +1,10 @@
 package com.pixelzerg.parser.pzcsharp.tokens;
 
 import com.pixelzerg.parser.Scanner;
+import com.pixelzerg.parser.ScannerSave;
 import com.pixelzerg.parser.pzcsharp.Token;
 import com.pixelzerg.parser.pzcsharp.TokenMatcher;
+import com.pixelzerg.parser.pzcsharp.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,11 +112,12 @@ public class Keyword extends TokenMatcher {
     }
 
     public int Step(Scanner s){
-        String str = s.read(longestKeyword);
-        if(str==null)return 0;
+        String word = Utils.readUntilInvalidChar(s);
+        if(word.equals(""))return 0;
         for(String kw : keywords){
-            if(str.startsWith(kw))return kw.length();
+            if(kw.equals(word))return word.length();
         }
+        //TODO: Make slightly more efficient by pre-sorting list and then breaking based on length
         return 0;
     }
 }

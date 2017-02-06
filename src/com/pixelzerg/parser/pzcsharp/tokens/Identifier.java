@@ -20,17 +20,17 @@ public class Identifier extends TokenMatcher{
             s.increment(1);
             if(!identifier_or_keyword(s))return 0;
         }
-        return s.getOffset(save)-1;
+        return s.getOffset(save);
     }
 
-    public boolean available_identifier(Scanner s){
+    public static boolean available_identifier(Scanner s){
         if(new Keyword().StepSafe(s) == 0 && identifier_or_keyword(s)){
             return true;
         }
         return false;
     }
 
-    public boolean identifier_or_keyword(Scanner s){
+    public static boolean identifier_or_keyword(Scanner s){
         if(!identifier_start_character(s))return false;
         if(!identifier_part_characters(s)){
             return true;
@@ -38,7 +38,7 @@ public class Identifier extends TokenMatcher{
         return true;
     }
 
-    public boolean identifier_start_character(Scanner s){
+    public static boolean identifier_start_character(Scanner s){
         if(Grammar.letter_character(s.getCur()) == 1|| s.getCur()=='\u005f'){
             s.increment(1);
             return true;
@@ -46,30 +46,26 @@ public class Identifier extends TokenMatcher{
         return false;
     }
 
-    public boolean identifier_part_characters(Scanner s){
-//        if(!identifier_part_character(s)){
-//            return false;
-//        }
-//        else{
-//            if(!identifier_part_characters(s))return false;
-//            if(!identifier_part_character(s))return false;
-//            return true;
-//        }
+    public static boolean identifier_part_characters(Scanner s){
         if(!identifier_part_character(s))return false;
         while(identifier_part_character(s)){}
         return true;
     }
 
-    public boolean identifier_part_character(Scanner s){
+    public static boolean identifier_part_character(Scanner s){
         char c = s.getCur();
-        if(Grammar.letter_character(c)==1||
-                Grammar.decimal_digit_character(c)==1||
-                Grammar.connecting_character(c)==1||
-                Grammar.combining_character(c)==1||
-                Grammar.formatting_character(c)==1){
+        if(IsIdentifierPartCharacter(c)){
             s.increment(1);
             return true;
         }
         return false;
+    }
+
+    public static boolean IsIdentifierPartCharacter(char c){
+        return (Grammar.letter_character(c)==1||
+                Grammar.decimal_digit_character(c)==1||
+                Grammar.connecting_character(c)==1||
+                Grammar.combining_character(c)==1||
+                Grammar.formatting_character(c)==1);
     }
 }

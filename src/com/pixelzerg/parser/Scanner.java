@@ -121,14 +121,14 @@ public class Scanner {
         String ret = "";
         char c = (char) -1;
         while (true) {
+            if(i >= length){
+                break;
+            }
             c = this.look(i);
             if(c==(char)-1){
                 return null;
             }
             ret+=c;
-            if(i >= length){
-                break;
-            }
             i++;
         }
         return ret;

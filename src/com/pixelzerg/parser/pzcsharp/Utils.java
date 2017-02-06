@@ -1,5 +1,9 @@
 package com.pixelzerg.parser.pzcsharp;
 
+import com.pixelzerg.parser.Scanner;
+import com.pixelzerg.parser.ScannerSave;
+import com.pixelzerg.parser.pzcsharp.tokens.Identifier;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +90,26 @@ public class Utils {
     
     public static boolean IsWhiteSpace(char c) {
         return (c == ' ' || c == (char) -1 || c == '\t' || c == '\n' || c == '\r');
+    }
+
+    public static String readUntilInvalidChar(Scanner s){
+        ScannerSave save = s.save();
+        int i = 0;
+        String ret = "";
+        char c = (char) -1;
+        while (true) {
+            c = s.look(i);
+            if(c==(char)-1){
+                break;
+            }
+            if(!Identifier.IsIdentifierPartCharacter(c)){
+                break;
+            }
+            ret+=c;
+            i++;
+        }
+        s.load(save);
+        return ret;
     }
 
 }

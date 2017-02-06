@@ -7,7 +7,7 @@ public class Main {
 
     //TODO parse with methods for each production
     public static void main(String[] args) {
-        Scanner s = new Scanner("@moi%yo");
+        Scanner s = new Scanner("namespacey eamoi%yo");
 //        NONE t = new NONE(s);
 //        System.out.println(t.toStringPretty());
 //        char c = (char) -1;
@@ -21,8 +21,10 @@ public class Main {
 //        }
         Identifier m = new Identifier();
         Token t = new Token(s);
-        t.value = s.read(m.StepSafe(s));
+        int step = m.StepSafe(s);
+        t.value = s.read(step);
         t.type=m.type;
+        System.out.println(step);
         System.out.println(t.toStringPretty());
     }
 
