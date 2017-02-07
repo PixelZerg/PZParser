@@ -13,7 +13,7 @@ public class Main {
         Token t = new Token(s);
         int step = m.StepSafe(s);
         long endTime = System.nanoTime();
-        System.out.println("Time elapsed: "+((endTime - startTime)/1000000)+"ms");
+        System.out.println("Time elapsed: "+((endTime - startTime)/1e6)+"ms");
         t.value = s.read(step);
         t.type=m.type;
         System.out.println(step);
