@@ -15,6 +15,7 @@ public class Token {
 		STRING_LITERAL,
 		NULL_LITERAL,
 		OPERATOR_OR_PUNCTUATOR,
+		COMMENT,
 	}
 	public String value = null;
 	public Token.TokenType type = Token.TokenType.NONE;

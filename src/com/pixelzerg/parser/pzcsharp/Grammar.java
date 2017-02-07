@@ -12,6 +12,14 @@ public class Grammar {
         return 0;
     }
 
+    public static int new_line_character(char c){
+        if(c=='\r')return 1;
+        if(c=='\n')return 1;
+        if(c=='\u2028')return 1;
+        if(c=='\u2029')return 1;
+        return 0;
+    }
+
     public static int letter_character(char c){
         if(Utils.CheckCharacter(c, Utils.CharacterType.Letter))return 1;
         return 0;

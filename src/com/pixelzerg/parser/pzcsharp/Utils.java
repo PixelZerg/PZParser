@@ -9,6 +9,30 @@ import java.util.List;
 
 /**
  * Created by pixelzerg on 25/01/17.
+ *
+ * Spec:
+ * X = A B C
+ * x(){
+ *     if(!a())return false;
+ *     if(!b())return false;
+ *     if(!c())return false;
+ *     return true
+ * }
+ *
+ * P = Q | R;
+ * p(){
+ *     if(!q()){
+ *         if(!r())return false;
+ *     }
+ *     return true
+ * }
+ *
+ * L = A | L A
+ * l(){
+ *     if(!a())return false;
+ *     while(a()){}
+ *     return true;
+ * }
  */
 public class Utils {
 

@@ -7,21 +7,13 @@ public class Main {
 
     //TODO parse with methods for each production
     public static void main(String[] args) {
-        Scanner s = new Scanner("namespacey eamoi%yo");
-//        NONE t = new NONE(s);
-//        System.out.println(t.toStringPretty());
-//        char c = (char) -1;
-//        while (true) {
-//            c = s.getCur();
-//            System.out.println(Expand(c)+"\t"+s.getPos());
-//            if(c==(char)-1){
-//                break;
-//            }
-//            s.increment(1);
-//        }
-        Identifier m = new Identifier();
+        long startTime = System.nanoTime();
+        Scanner s = new Scanner("/*o\n*moooo//*/");
+        Comment m = new Comment();
         Token t = new Token(s);
         int step = m.StepSafe(s);
+        long endTime = System.nanoTime();
+        System.out.println("Time elapsed: "+((endTime - startTime)/1000000)+"ms");
         t.value = s.read(step);
         t.type=m.type;
         System.out.println(step);

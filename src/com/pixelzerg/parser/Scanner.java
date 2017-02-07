@@ -79,6 +79,10 @@ public class Scanner {
     }
 
     public Pos getPos(int lookahead) {
+        if(lindex>curindex){
+            lindex=0;
+            lpos = new Pos(0,0);
+        }
         Pos ret = lpos;
         int i;
         for (i = lindex; i < curindex + lookahead; i++) {
