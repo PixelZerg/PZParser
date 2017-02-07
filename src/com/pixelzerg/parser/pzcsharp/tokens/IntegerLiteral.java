@@ -39,4 +39,34 @@ public class IntegerLiteral extends TokenMatcher {
         ScannerSave save = s.saveq();
         return s.getOffset(save);
     }
+    
+    public static boolean integer_literal(Scanner s){
+    	if(!decimal_integer_literal()){
+    		if(!hexadecimal_integer_literal())return false;
+    	}
+    	return true;
+    	
+    }
+    
+    public static boolean decimal_integer_literal(Scanner s){
+    }
+    
+    public static boolean decimal_digits(Scanner s){
+    	
+    }
+    
+    public static boolean decimal_digit(Scanner s){
+    	
+    }
+    
+    public static boolean IsDecimalDegit(char c){
+    	if(c == '0'||c=='1'||c=='2'||c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9')
+    		return true;
+    	return false;
+    }
+    
+    public static boolean hexadecimal_integer_literal(Scanner s){
+    	
+    }
+    
 }
