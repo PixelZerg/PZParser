@@ -8,8 +8,8 @@ public class Main {
     //TODO parse with methods for each production
     public static void main(String[] args) {
         long startTime = System.nanoTime();
-        Scanner s = new Scanner("/*o\n*moooo//*/");
-        Comment m = new Comment();
+        Scanner s = new Scanner("0X1Alu");
+        IntegerLiteral m = new IntegerLiteral();
         Token t = new Token(s);
         int step = m.StepSafe(s);
         long endTime = System.nanoTime();

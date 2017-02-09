@@ -51,7 +51,7 @@ public class Comment extends TokenMatcher {
 
     public static boolean asterisk(Scanner s){
         char c = s.getCur();
-        if(c==(char)-1)return false;
+//        if(c==(char)-1)return false;
         if(c!='*')return false;
         s.increment(1);
         return true;
@@ -59,7 +59,7 @@ public class Comment extends TokenMatcher {
 
     public static boolean not_asterisk(Scanner s){
         char c = s.getCur();
-        if(c==(char)-1)return false;
+//        if(c==(char)-1)return false;
         if(c=='*')return false;
         s.increment(1);
         return true;
@@ -67,7 +67,7 @@ public class Comment extends TokenMatcher {
 
     public static boolean not_slash(Scanner s){
         char c = s.getCur();
-        if(c==(char)-1)return false;
+//        if(c==(char)-1)return false;
         if(c=='/')return false;
         s.increment(1);
         return true;
@@ -111,7 +111,7 @@ public class Comment extends TokenMatcher {
 
     public static boolean input_character(Scanner s){
         char c = s.getCur();
-        if(c==(char)-1)return false;
+//        if(c==(char)-1)return false;
         if(Grammar.new_line_character(c)==1)return false;
         s.increment(1);
         return true;
