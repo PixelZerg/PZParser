@@ -35,12 +35,14 @@ public class Identifier extends TokenMatcher{
     public Identifier(){
         super.type = Token.TokenType.IDENTIFIER;
     }
+    public boolean usesAt = false;
     public int Step(Scanner s){
         ScannerSave save = s.saveq();
         if(!available_identifier(s)){
             if(!(s.getCur()=='@'))return 0;
             s.increment(1);
             if(!identifier_or_keyword(s))return 0;
+            usesAt=true;
         }
         return s.getOffset(save);
     }

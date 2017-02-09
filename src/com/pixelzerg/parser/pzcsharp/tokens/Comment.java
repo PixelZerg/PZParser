@@ -13,13 +13,21 @@ import com.pixelzerg.parser.pzcsharp.TokenMatcher;
  */
 //TODO
 public class Comment extends TokenMatcher {
+    public enum CommentType{
+        NONE,
+        SINGLE_LINE,
+        DELIMITED
+    }
+    public CommentType commentType = CommentType.NONE;
     public Comment(){ super.type = Token.TokenType.COMMENT; }
 
     public int Step(Scanner s){
         ScannerSave save = s.saveq();
         if(!single_line_comment(s)){
             if(!delimited_comment(s))return 0;
+            this.commentType = CommentType.DELIMITED;
         }
+        this.commentType = CommentType.SINGLE_LINE;
         return s.getOffset(save);
     }
 

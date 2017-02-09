@@ -33,9 +33,16 @@ import com.pixelzerg.parser.pzcsharp.TokenMatcher;
  */
 
 public class IntegerLiteral extends TokenMatcher {
+    public enum IntegerLiteralType{
+        NONE,
+        HEX,
+        DECIMAL,
+    }
     public IntegerLiteral() {
         super.type = Token.TokenType.INTEGER_LITERAL;
     }
+
+    public IntegerLiteralType integerLiteralType = IntegerLiteralType.NONE;
 
     public int Step(Scanner s) {
         ScannerSave save = s.saveq();
@@ -43,10 +50,12 @@ public class IntegerLiteral extends TokenMatcher {
         return s.getOffset(save);
     }
 
-    public static boolean integer_literal(Scanner s) {
+    public boolean integer_literal(Scanner s) {
         if (!hexadecimal_integer_literal(s)) {
             if (!decimal_integer_literal(s)) return false;
+            this.integerLiteralType = IntegerLiteralType.DECIMAL;
         }
+        this.integerLiteralType = IntegerLiteralType.HEX;
         return true;
 
     }
