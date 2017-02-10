@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         long startTime = System.nanoTime();
 
-        Scanner s = new Scanner("/*moo*");
+        Scanner s = new Scanner("/*moo*/");
         Comment m = new Comment();
 
         long endTime;
