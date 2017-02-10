@@ -5,6 +5,7 @@ import com.pixelzerg.parser.ScannerSave;
 import com.pixelzerg.parser.pzcsharp.Grammar;
 import com.pixelzerg.parser.pzcsharp.Token;
 import com.pixelzerg.parser.pzcsharp.TokenMatcher;
+import com.pixelzerg.parser.pzcsharp.errorhandling.CompilerException;
 
 /**
  * Created by pixelzerg on 05/02/17.
@@ -36,7 +37,7 @@ public class Identifier extends TokenMatcher{
         super.type = Token.TokenType.IDENTIFIER;
     }
     public boolean usesAt = false;
-    public int Step(Scanner s){
+    public int Step(Scanner s) throws CompilerException {
         ScannerSave save = s.saveq();
         if(!available_identifier(s)){
             if(!(s.getCur()=='@'))return 0;
@@ -47,14 +48,14 @@ public class Identifier extends TokenMatcher{
         return s.getOffset(save);
     }
 
-    public static boolean available_identifier(Scanner s){
+    public static boolean available_identifier(Scanner s) throws CompilerException {
         if(new Keyword().StepSafe(s) == 0 && identifier_or_keyword(s)){
             return true;
         }
         return false;
     }
 
-    public static boolean identifier_or_keyword(Scanner s){
+    public static boolean identifier_or_keyword(Scanner s) throws CompilerException {
         if(!identifier_start_character(s))return false;
         if(!identifier_part_characters(s)){
             return true;
@@ -70,18 +71,19 @@ public class Identifier extends TokenMatcher{
         return false;
     }
 
-    public static boolean identifier_part_characters(Scanner s){
+    public static boolean identifier_part_characters(Scanner s) throws CompilerException {
         if(!identifier_part_character(s))return false;
         while(identifier_part_character(s)){}
         return true;
     }
 
-    public static boolean identifier_part_character(Scanner s){
+    public static boolean identifier_part_character(Scanner s) throws CompilerException {
         char c = s.getCur();
         if(IsIdentifierPartCharacter(c)){
             s.increment(1);
             return true;
         }
+        //throw new CompilerException(false, s.filepath, s.getPos(), CompilerException.ErrorType.UnexpectedCharacter, "\""+s.getCur()+"\" is not a valid character for an identifier");
         return false;
     }
 
