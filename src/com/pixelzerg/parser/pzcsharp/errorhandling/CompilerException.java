@@ -6,6 +6,7 @@ import com.pixelzerg.parser.Pos;
  * Created by pixelzerg on 28/01/17.
  */
 
+//TODO replace filepath with scanner object
 //Error(line 5, char 6): PZ_W023 - UnexpectedEOL: blah blah -- Exception: blah
 public class CompilerException extends PZCSharpException {
     public enum ErrorType {
