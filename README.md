@@ -11,12 +11,12 @@
   - [x] connecting-character
   - [x] formatting-character
 - Tokens:
-  - [ ] comments
+  - [x] comments
   - [x] identifier
   - [x] keyword
   - [ ] operator-or-punctuator
-  - [ ] boolean-literal
-  - [ ] integer-literal
+  - [x] boolean-literal
+  - [x] integer-literal
   - [ ] real-literal
   - [ ] character-literal
   - [ ] string-literal
