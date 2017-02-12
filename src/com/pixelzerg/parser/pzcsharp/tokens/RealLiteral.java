@@ -29,6 +29,7 @@ public class RealLiteral extends TokenMatcher {
 
     public int Step(Scanner s){
         ScannerSave save = s.saveq();
+		if(!real_literal(s))return 0;
         return s.getOffset(save);
     }
 	
