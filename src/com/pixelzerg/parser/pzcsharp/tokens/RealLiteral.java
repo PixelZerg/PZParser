@@ -31,4 +31,34 @@ public class RealLiteral extends TokenMatcher {
         ScannerSave save = s.saveq();
         return s.getOffset(save);
     }
+	
+	public boolean real_literal(Scanner s){
+		
+	}
+	
+	public boolean sign(Scanner s){
+		char c = s.getCur();
+		if(IsSign(c)){
+			s.increment(1);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean IsSign(char c){
+		return (c=='+'||c=='-');
+	}
+	
+	public boolean dot(Scanner s){
+		char c = s.getCur();
+		if(IsDot(c)){
+			s.increment(1);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean IsDot(char c){
+		return c=='.';
+	}
 }
