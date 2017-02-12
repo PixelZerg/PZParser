@@ -33,7 +33,54 @@ public class RealLiteral extends TokenMatcher {
     }
 	
 	public boolean real_literal(Scanner s){
-		
+		if(!IntegerLiteral.decimal_digits(s)){
+			if(!dot(s))return false;
+			if(!IntegerLiteral.decimal_digits(s))return false;
+			exponent_part(s);
+			real_type_suffix(s);
+			return true;
+		}
+		if(!dot(s)){
+			if(!real_type_suffix(s)){
+				if(!exponent_part(s))return false;
+				real_type_suffix(s);
+				return true;
+			}
+			return true;
+		}
+		if(!IntegerLiteral.decimal_digits(s))return false;
+		exponent_part(s);
+		real_type_suffix(s);
+		return true;
+	}
+	
+	public boolean real_type_suffix(Scanner s){
+		char c = s.getCur();
+		if(IsRealTypeSuffix(Character.toLowerCase(c))){
+			s.increment(1);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean IsRealTypeSuffix(char c){
+		return (c=='f'||c=='d'||c=='m');
+	}
+	
+	public boolean exponent_part(Scanner s){
+		if(!e(s))return false;
+		sign(s);
+		if(!IntegerLiteral.decimal_digits(s))return false;
+		return true;
+	}
+	
+	public boolean e(Scanner s){
+		char c=s.getCur();
+		if(Character.toLowerCase(c)==('e')){
+			s.increment(1);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean sign(Scanner s){
