@@ -1,6 +1,7 @@
 package com.pixelzerg.parser;
 
 import com.pixelzerg.parser.pzcsharp.Token;
+import com.pixelzerg.parser.pzcsharp.Utils;
 import com.pixelzerg.parser.pzcsharp.errorhandling.CompilerException;
 import com.pixelzerg.parser.pzcsharp.tokens.*;
 
@@ -10,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         long startTime = System.nanoTime();
 
-        Scanner s = new Scanner("/*mooo**/");
+        Scanner s = new Scanner("///*m**/\n/*moo*/");
         Comment m = new Comment();
 
         long endTime;

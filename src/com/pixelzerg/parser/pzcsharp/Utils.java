@@ -135,6 +135,40 @@ public class Utils {
         s.load(save);
         return ret;
     }
+    public static String readUntil(Scanner s, String str){
+        ScannerSave save = s.save();
+        String ret = "";
+        char c = (char) -1;
+        while (true) {
+            c = s.getCur();
+            if(c==(char)-1){
+                break;
+            }
+            if(s.read(str.length()).equals(str)){
+                break;
+            }
+            ret+=c;
+            s.increment(1);
+        }
+        s.load(save);
+        return ret;
+    }
+
+    public static int firstIndexOf(Scanner s, String str){
+        ScannerSave save = s.save();
+        while (true) {
+            if(s.getCur()==(char)-1){
+                break;
+            }
+            if(s.read(str.length()).equals(str)){
+                break;
+            }
+            s.increment(1);
+        }
+        int i = s.getOffset(save);
+        s.load(save);
+        return i;
+    }
 
     public static boolean match(Scanner s, String matchh, boolean caseInsensitive, boolean allowSubstr){
         String read;

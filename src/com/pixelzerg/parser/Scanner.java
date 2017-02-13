@@ -23,7 +23,6 @@ public class Scanner {
     public void setSource(String sc) {
         this.source = sc;
         this.source = this.source.replace("\r\n", "\n");
-        this.source = this.source.replace("\r", "\n");
         this.source = this.source.replace("\u2028", "\n");
         this.source = this.source.replace("\u2029", "\n");
         //2.3.1
@@ -35,6 +34,7 @@ public class Scanner {
                 source += '\r';
             }
         }
+        this.source = this.source.replace("\r", "\n");
     }
 
     public char getCur() {
