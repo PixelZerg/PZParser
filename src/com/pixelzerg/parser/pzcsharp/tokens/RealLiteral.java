@@ -4,6 +4,7 @@ import com.pixelzerg.parser.Scanner;
 import com.pixelzerg.parser.ScannerSave;
 import com.pixelzerg.parser.pzcsharp.Token;
 import com.pixelzerg.parser.pzcsharp.TokenMatcher;
+import com.pixelzerg.parser.pzcsharp.Utils;
 
 /**
  * Created by pixelzerg on 06/02/17.
@@ -23,7 +24,7 @@ import com.pixelzerg.parser.pzcsharp.TokenMatcher;
  real-type-suffix: one of
         F f D d M m
  */
-//TODO
+
 public class RealLiteral extends TokenMatcher {
     public RealLiteral(){ super.type = Token.TokenType.REAL_LITERAL; }
 
@@ -55,58 +56,26 @@ public class RealLiteral extends TokenMatcher {
 		return true;
 	}
 	
-	public boolean real_type_suffix(Scanner s){
-		char c = s.getCur();
-		if(IsRealTypeSuffix(Character.toLowerCase(c))){
-			s.increment(1);
-			return true;
-		}
-		return false;
+	public static boolean real_type_suffix(Scanner s){
+		return Utils.match(s,true,"f","d","m");
 	}
 	
-	public boolean IsRealTypeSuffix(char c){
-		return (c=='f'||c=='d'||c=='m');
-	}
-	
-	public boolean exponent_part(Scanner s){
+	public static boolean exponent_part(Scanner s){
 		if(!e(s))return false;
 		sign(s);
 		if(!IntegerLiteral.decimal_digits(s))return false;
 		return true;
 	}
 	
-	public boolean e(Scanner s){
-		char c=s.getCur();
-		if(Character.toLowerCase(c)==('e')){
-			s.increment(1);
-			return true;
-		}
-		return false;
+	public static boolean e(Scanner s){
+		return Utils.match(s,"e",true);
 	}
 	
-	public boolean sign(Scanner s){
-		char c = s.getCur();
-		if(IsSign(c)){
-			s.increment(1);
-			return true;
-		}
-		return false;
+	public static boolean sign(Scanner s){
+		return Utils.match(s,"+","-");
 	}
 	
-	public boolean IsSign(char c){
-		return (c=='+'||c=='-');
-	}
-	
-	public boolean dot(Scanner s){
-		char c = s.getCur();
-		if(IsDot(c)){
-			s.increment(1);
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean IsDot(char c){
-		return c=='.';
+	public static boolean dot(Scanner s){
+		return Utils.match(s,".");
 	}
 }

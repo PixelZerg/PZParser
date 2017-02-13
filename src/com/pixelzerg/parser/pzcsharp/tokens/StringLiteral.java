@@ -4,6 +4,7 @@ import com.pixelzerg.parser.Scanner;
 import com.pixelzerg.parser.ScannerSave;
 import com.pixelzerg.parser.pzcsharp.Token;
 import com.pixelzerg.parser.pzcsharp.TokenMatcher;
+import com.pixelzerg.parser.pzcsharp.Utils;
 
 /**
  * Created by pixelzerg on 06/02/17.
@@ -46,4 +47,26 @@ public class StringLiteral extends TokenMatcher {
         ScannerSave save = s.saveq();
         return s.getOffset(save);
     }
+
+//    public boolean string_literal(Scanner s){
+//
+//    }
+//
+//    public static boolean regular_string_literal(Scanner s){
+//        if(!quote(s))return false;
+//
+//        if(!quote(s))return false;
+//    }
+//
+//    public static boolean real_string_literal_characters(Scanner s){
+//
+//    }
+//
+//    public static boolean real_string_literal_character(Scanner s){
+//
+//    }
+//
+//    public static boolean quote(Scanner s){
+//        return Utils.match(s,"\"");
+//    }
 }

@@ -4,6 +4,7 @@ import com.pixelzerg.parser.Scanner;
 import com.pixelzerg.parser.ScannerSave;
 import com.pixelzerg.parser.pzcsharp.Token;
 import com.pixelzerg.parser.pzcsharp.TokenMatcher;
+import com.pixelzerg.parser.pzcsharp.Utils;
 
 /**
  * Created by pixelzerg on 06/02/17.
@@ -74,44 +75,18 @@ public class IntegerLiteral extends TokenMatcher {
     }
 
     public static boolean decimal_digit(Scanner s) {
-        char c = s.getCur();
-//        if (c == (char) -1) return false;
-        if (!IsDecimalDegit(c)) return false;
-        s.increment(1);
-        return true;
+        return Utils.match(s,"0","1","2","3","4","5","6","7","8","9");
     }
-
-    public static boolean IsDecimalDegit(char c) {
-        if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')
-            return true;
-        return false;
-    }
-
-    /*
- hexadecimal-integer-literal:
-         0x   hex-digits   integer-type-suffixopt
-         0X   hex-digits   integer-type-suffixopt
- hex-digits:
-        hex-digit
-        hex-digits   hex-digit
- hex-digit: one of
-        0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f
-        */
 
     public static boolean hexadecimal_integer_literal(Scanner s) {
-        if(!IsHexStart(s))return false;
+        if(!hex_start(s))return false;
         if(!hex_digits(s))return false;
         integer_type_suffix(s);
         return true;
     }
 
-    public static boolean IsHexStart(Scanner s){
-        String sel = s.read(2);
-        if(sel.equals("0x")||sel.equals("0X")){
-            s.increment(2);
-            return true;
-        }
-        return false;
+    public static boolean hex_start(Scanner s){
+        return Utils.match(s,"0x","0X");
     }
 
     public static boolean hex_digits(Scanner s){
@@ -121,16 +96,10 @@ public class IntegerLiteral extends TokenMatcher {
     }
 
     public static boolean hex_digit(Scanner s){
-        char c = s.getCur();
-        if(!IsHexDigit(c))return false;
-        s.increment(1);
+        if(!decimal_digit(s)){
+            return Utils.match(s,true,"a","b","c","d","e","f");
+        }
         return true;
-
-    }
-
-    public static boolean IsHexDigit(char c){
-        return (IsDecimalDegit(c)||
-            c=='A'||c=='B'||c=='C'||c=='D'||c=='E'||c=='F'||c=='a'||c=='b'||c=='c'||c=='d'||c=='e'||c=='f');
     }
 
     public static boolean integer_type_suffix(Scanner s){

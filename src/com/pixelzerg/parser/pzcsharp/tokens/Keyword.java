@@ -18,7 +18,6 @@ import java.util.List;
 
 public class Keyword extends TokenMatcher {
     private static List<String> keywords = null;
-    private static int longestKeyword = -1;
     public Keyword(){
         super.type = Token.TokenType.KEYWORD;
         if(keywords == null)Initialise();
@@ -103,25 +102,9 @@ public class Keyword extends TokenMatcher {
         keywords.add("void");
         keywords.add("volatile");
         keywords.add("while");
-        longestKeyword = getLongestKeyword();
-    }
-    private static int getLongestKeyword(){
-        int ret = -1;
-        for (String kw : keywords) {
-            if(kw.length()>ret){
-                ret=kw.length();
-            }
-        }
-        return ret;
     }
 
     public int Step(Scanner s){
-        String word = Utils.readUntilInvalidChar(s);
-        if(word.equals(""))return 0;
-        for(String kw : keywords){
-            if(kw.equals(word))return word.length();
-        }
-        //TODO: Make slightly more efficient by pre-sorting list and then breaking based on length
-        return 0;
+        return Utils.matchn(s,false,false,keywords.toArray(new String[keywords.size()]));
     }
 }

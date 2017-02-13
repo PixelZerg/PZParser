@@ -136,4 +136,82 @@ public class Utils {
         return ret;
     }
 
+    public static boolean match(Scanner s, String matchh, boolean caseInsensitive, boolean allowSubstr){
+        String read;
+        String match;
+        if(caseInsensitive)match = matchh.toLowerCase();
+        else match = matchh;
+        if(allowSubstr) read = s.read(match.length());
+        else read = Utils.readUntilInvalidChar(s);
+        if(caseInsensitive)read = read.toLowerCase();
+
+        if(read.equals(match)){
+            s.increment(match.length());
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean match(Scanner s, String match){
+        return match(s,match,false,true);
+    }
+
+    public static boolean match(Scanner s, String match, boolean caseInsensitive){
+        return match(s,match,caseInsensitive,true);
+    }
+
+    public static boolean match(Scanner s, boolean caseInsensitive, boolean allowSubstr, String... matches){
+        for(String match : matches){
+            if(match(s,match,caseInsensitive,allowSubstr))return true;
+        }
+        return false;
+    }
+
+    public static boolean match(Scanner s, boolean caseInsensitive, String... matches){
+        return match(s,caseInsensitive,true,matches);
+    }
+
+    public static boolean match(Scanner s, String... matches){
+        return match(s,false,true,matches);
+    }
+
+    public static int matchn(Scanner s, String matchh, boolean caseInsensitive, boolean allowSubstr){
+        String read;
+        String match;
+        if(caseInsensitive)match = matchh.toLowerCase();
+        else match = matchh;
+        if(allowSubstr) read = s.read(match.length());
+        else read = Utils.readUntilInvalidChar(s);
+        if(caseInsensitive)read = read.toLowerCase();
+
+        if(read.equals(match)){
+            s.increment(match.length());
+            return match.length();
+        }
+        return 0;
+    }
+
+    public static int matchn(Scanner s, String match){
+        return matchn(s,match,false,true);
+    }
+
+    public static int matchn(Scanner s, String match, boolean caseInsensitive){
+        return matchn(s,match,caseInsensitive,true);
+    }
+
+    public static int matchn(Scanner s, boolean caseInsensitive, boolean allowSubstr, String... matches){
+        for(String match : matches){
+            int i = matchn(s,match,caseInsensitive,allowSubstr);
+            if(i!=0)return i;
+        }
+        return 0;
+    }
+
+    public static int matchn(Scanner s, boolean caseInsensitive, String... matches){
+        return matchn(s,caseInsensitive,true,matches);
+    }
+
+    public static int matchn(Scanner s, String... matches){
+        return matchn(s,false,true,matches);
+    }
 }

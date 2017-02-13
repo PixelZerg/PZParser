@@ -6,6 +6,7 @@ import com.pixelzerg.parser.ScannerSave;
 import com.pixelzerg.parser.pzcsharp.Grammar;
 import com.pixelzerg.parser.pzcsharp.Token;
 import com.pixelzerg.parser.pzcsharp.TokenMatcher;
+import com.pixelzerg.parser.pzcsharp.Utils;
 import com.pixelzerg.parser.pzcsharp.errorhandling.CompilerException;
 
 /**
@@ -13,7 +14,7 @@ import com.pixelzerg.parser.pzcsharp.errorhandling.CompilerException;
 
  2.3.3
  */
-//TODO
+//TODO: Fix bug case: /*moo**/
 public class Comment extends TokenMatcher {
     public enum CommentType{
         NONE,
@@ -55,18 +56,14 @@ public class Comment extends TokenMatcher {
                 s.increment(1);//implement for later
                 return false;
             }else{
-                throw new CompilerException(false, s.filepath, s.getPos().lineno,s.getPos().charno-1, CompilerException.ErrorType.UnexpectedCharacter, "Unexpected \""+ CharUtils.Expand(s.getCur())+"\" - was expecting \"/\"");
+              //  throw new CompilerException(false, s.filepath, s.getPos().lineno,s.getPos().charno-1, CompilerException.ErrorType.UnexpectedCharacter, "Unexpected \""+ CharUtils.Expand(s.getCur())+"\" - was expecting \"/\"");
             }
         }
         return true;
     }
 
     public static boolean asterisk(Scanner s){
-        char c = s.getCur();
-//        if(c==(char)-1)return false;
-        if(c!='*')return false;
-        s.increment(1);
-        return true;
+        return Utils.match(s,"*");
     }
 
     public static boolean not_asterisk(Scanner s){
@@ -92,27 +89,15 @@ public class Comment extends TokenMatcher {
     }
 
     public static boolean lit_double_slash(Scanner s){
-        if(s.read(2).equals("//")){
-            s.increment(2);
-            return true;
-        }
-        return false;
+        return Utils.match(s,"//");
     }
 
     public static boolean lit_comment_start(Scanner s){
-        if(s.read(2).equals("/*")){
-            s.increment(2);
-            return true;
-        }
-        return false;
+        return Utils.match(s,"/*");
     }
 
     public static boolean lit_comment_end(Scanner s){
-        if(s.read(2).equals("*/")){
-            s.increment(2);
-            return true;
-        }
-        return false;
+        return Utils.match(s,"*/");
     }
 
     public static boolean input_characters(Scanner s){

@@ -19,10 +19,6 @@ public class BooleanLiteral extends TokenMatcher {
     public BooleanLiteral(){ super.type = Token.TokenType.BOOLEAN_LITERAL; }
 
     public int Step(Scanner s){
-        String word = Utils.readUntilInvalidChar(s);
-        if(word.equals("true")||word.equals("false")){
-             return word.length();
-        }
-        return 0;
+        return Utils.matchn(s,false,false,"true","false");
     }
 }

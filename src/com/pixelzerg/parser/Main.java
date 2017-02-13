@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) {
         long startTime = System.nanoTime();
 
-        Scanner s = new Scanner("1.2e+6M");
-        RealLiteral m = new RealLiteral();
+        Scanner s = new Scanner("/*mooo**/");
+        Comment m = new Comment();
 
         long endTime;
         Token t = new Token(s);

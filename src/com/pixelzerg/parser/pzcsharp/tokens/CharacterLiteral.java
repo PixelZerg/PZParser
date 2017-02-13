@@ -25,7 +25,7 @@ import com.pixelzerg.parser.pzcsharp.Utils;
  hexadecimal-escape-sequence:
         \x   hex-digit   hex-digitopt   hex-digitopt   hex-digitopt
  */
-//TODO
+
 public class CharacterLiteral extends TokenMatcher {
     public CharacterLiteral(){ super.type = Token.TokenType.CHARACTER_LITERAL; }
 
@@ -43,10 +43,6 @@ public class CharacterLiteral extends TokenMatcher {
     	
     }
     
-    /*if(!q()){
-    *         if(!r())return false;
-    *     }
-	*/
     public static boolean character(Scanner s) {
 		if(!single_character(s)){
 			if(!simple_escape_sequence(s)){
@@ -67,23 +63,13 @@ public class CharacterLiteral extends TokenMatcher {
     }
     
     public static boolean hex_start(Scanner s){
-    	String word = s.read(2);
-    	if(word.equals("\\x")){
-    		s.increment(word.length());
-    		return true;
-    	}
-    	return false;
+    	return Utils.match(s,"\\x");
     }
     
     public static boolean simple_escape_sequence(Scanner s){
-    	String word = s.read(2);
-        if(word.equals("\\'")||word.equals("\\\"")||word.equals("\\\\")||word.equals("\\0")||
-        		word.equals("\\a")||word.equals("\\b")||word.equals("\\f")||word.equals("\\n")||
-        		word.equals("\\r")||word.equals("\\t")||word.equals("\\v")){
-             s.increment(word.length());
-             return true;
-        }
-        return false;
+        return Utils.match(s,"\\'","\\\"","\\\\","\\0",
+                "\\a","\\b","\\f","\\n",
+                "\\r","\\t","\\v");
     }
     
     public static boolean single_character(Scanner s){
@@ -99,14 +85,6 @@ public class CharacterLiteral extends TokenMatcher {
     }
 
 	public static boolean quote(Scanner s){
-    	char c = s.getCur();
-//      if (c == (char) -1) return false;
-      if (!IsQuote(c)) return false;
-      s.increment(1);
-      return true;
-    }
-    
-    public static boolean IsQuote(char c){
-    	return c=='\'';
+      return Utils.match(s,"\'");
     }
 }

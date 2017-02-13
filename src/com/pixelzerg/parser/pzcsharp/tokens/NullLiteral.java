@@ -18,10 +18,6 @@ public class NullLiteral extends TokenMatcher {
     public NullLiteral(){ super.type = Token.TokenType.NULL_LITERAL; }
 
     public int Step(Scanner s){
-        String word = Utils.readUntilInvalidChar(s);
-        if(word.equals("null")){
-             return word.length();
-        }
-        return 0;
+        return Utils.matchn(s,"null",false,false);
     }
 }
